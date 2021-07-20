@@ -97,4 +97,25 @@ class AdminUserView(viewsets.ViewSet):
         })
 
 class ClientUserView(viewsets.ViewSet):
-    
+
+    def userNetwork(self ,request ,pk):
+        userializer=UserDetailsSerializer(request.user)
+        if userializer.data['role']=='client':
+            queryset=Network.objects.filter(user=userializer.data['id']).all()
+            serializer=NetworkSerializer(queryset,many=True)
+            return Response(serializer.data)
+        return Response({
+            "message":"You aren't a client "
+        })
+
+    def usernodeNetwork(self ,request ,pk):
+        userializer=UserDetailsSerializer(request.user)
+        if userializer.data['role']=="client":
+            queryset=Network.objects.get(id=pk)
+            netserializer=NetworkSerializer(queryset)
+            nodequeryset=Node.objects.filter(network=netserializer.data['id']).all()
+            nodeserializer=NodeSerializer(nodequeryset,many=True)
+            return Response(nodeserializer.data)
+        return Response({
+            "message":"You aren't a client "
+        })
