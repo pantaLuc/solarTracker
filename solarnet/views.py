@@ -96,4 +96,5 @@ class AdminUserView(viewsets.ViewSet):
             "message":"client can view a this "
         })
 
-#class Client
+class ClientUserView(viewsets.ViewSet):
+    
