@@ -119,3 +119,14 @@ class ClientUserView(viewsets.ViewSet):
         return Response({
             "message":"You aren't a client "
         })
+    def userdatanodenetwork(self ,request ,pk):
+        userializer=UserDetailsSerializer(request.user)
+        if userializer.data['role']=='client':
+            queryset=Data.objects.filter(node=pk).all()
+            dataSerializer=DataSerializer(queryset,many=True)
+            return Response(dataSerializer.data)
+        return Response({
+             "message":"You aren't a client "
+        })
+
+        

@@ -14,6 +14,7 @@ path('network/',NetworkCreateAPI.as_view()),
 path('node/<int:pk>/', NodeDetail.as_view()),
 path('node/' ,NodeCreate.as_view()),
 path('data/' , DataCreate.as_view()),
+###adminView
 path('listuser/' ,AdminUserView.as_view({
             'get': 'listUtilisateur',
         })),
@@ -31,6 +32,17 @@ path('nodeNetwork/<int:pk>/' ,AdminUserView.as_view({
 
 path('dataNode/<int:pk>/' ,AdminUserView.as_view({
     'get':'dataNode',
+})),
+
+##ClientAdmin
+path('userNetwork/<int:pk>/' ,AdminUserView.as_view({
+    'get':'userNetwork',
+})),
+path('usernodeNetwork/<int:pk>/' ,AdminUserView.as_view({
+    'get':'usernodeNetwork',
+})),
+path('userdatanodenetwork/<int:pk>/' ,AdminUserView.as_view({
+    'get':'userdatanodenetwork',
 })),
 
 path('openapi', get_schema_view( # new
