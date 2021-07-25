@@ -193,7 +193,7 @@ paths:
           description: ''
       tags:
       - api
-  /api/listuser:
+  /api/listuser/:
     get:
       operationId: listUtilisateurAdminUser
       description: ''
@@ -206,11 +206,119 @@ paths:
           description: ''
       tags:
       - api
-  /api/listNeworks/:
+  /api/listneworks/:
     get:
       operationId: listNeworksAdminUser
       description: ''
       parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/listData/:
+    get:
+      operationId: listofDataAdminUser
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/nodeNetwork/{id}/:
+    get:
+      operationId: nodeNetworkAdminUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/dataNode/{id}/:
+    get:
+      operationId: dataNodeAdminUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/userNetwork/{id}/:
+    get:
+      operationId: userNetworkClientUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/usernodeNetwork/{id}/:
+    get:
+      operationId: usernodeNetworkClientUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+      tags:
+      - api
+  /api/userdatanodenetwork/{id}/:
+    get:
+      operationId: userdatanodenetworkClientUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -409,6 +517,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Node'
+          description: ''
+      tags:
+      - api
+  /api/data/:
+    post:
+      operationId: createData
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Data'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Data'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Data'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Data'
           description: ''
       tags:
       - api
@@ -658,6 +791,23 @@ components:
           maxLength: 30
       required:
       - username
+    Data:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        data:
+          type: number
+        node:
+          type: integer
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - data
     PasswordReset:
       type: object
       properties:

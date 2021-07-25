@@ -1,6 +1,6 @@
 from solarnet.models import Node
 from django.urls import path
-from .views import DataCreate, NetworkCreateAPI, NetworkDetail , NodeCreate, NodeDetail,AdminUserView
+from .views import DataCreate, NetworkCreateAPI, NetworkDetail , NodeCreate, NodeDetail,AdminUserView,ClientUserView
 from rest_framework.schemas import get_schema_view # new
 from rest_framework import permissions
 from drf_yasg import openapi # new
@@ -35,13 +35,13 @@ path('dataNode/<int:pk>/' ,AdminUserView.as_view({
 })),
 
 ##ClientAdmin
-path('userNetwork/<int:pk>/' ,AdminUserView.as_view({
+path('userNetwork/<int:pk>/' ,ClientUserView.as_view({
     'get':'userNetwork',
 })),
-path('usernodeNetwork/<int:pk>/' ,AdminUserView.as_view({
+path('usernodeNetwork/<int:pk>/' ,ClientUserView.as_view({
     'get':'usernodeNetwork',
 })),
-path('userdatanodenetwork/<int:pk>/' ,AdminUserView.as_view({
+path('userdatanodenetwork/<int:pk>/',ClientUserView.as_view({
     'get':'userdatanodenetwork',
 })),
 
