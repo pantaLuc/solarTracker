@@ -6,11 +6,14 @@ coreapi==2.3.3
 coreschema==0.0.4
 cryptography==3.4.7
 defusedxml==0.7.1
+dj-database-url==0.5.0
 dj-rest-auth==2.1.9
 Django==3.2.5
 django-allauth==0.45.0
+django-heroku==0.0.0
 djangorestframework==3.12.4
 drf-yasg==1.20.0
+gunicorn==20.1.0
 idna==3.2
 inflection==0.5.1
 itypes==1.2.0
@@ -32,3 +35,4 @@ ruamel.yaml.clib==0.2.6
 sqlparse==0.4.1
 uritemplate==3.0.1
 urllib3==1.26.6
+whitenoise==5.3.0
