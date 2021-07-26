@@ -164,9 +164,6 @@ SITE_ID = 1 #7
 AUTH_USER_MODEL = 'users.User'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_DIR, 'static'),
-)
 django_heroku.settings(locals())
 
 CORS_ALLOW_ALL_ORIGINS = True
