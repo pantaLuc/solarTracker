@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.account', # new6
     'allauth.socialaccount', # new6  
     'dj_rest_auth', # new4
+    'corsheaders',
 
     'dj_rest_auth.registration', # new5
     'drf_yasg', # new
@@ -73,6 +74,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,3 +163,5 @@ AUTH_USER_MODEL = 'users.User'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 django_heroku.settings(locals())
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
