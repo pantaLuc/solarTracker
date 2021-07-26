@@ -161,11 +161,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new7
 SITE_ID = 1 #7
 
 AUTH_USER_MODEL = 'users.User'
-STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'staticfiles'))
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+django_heroku.settings(locals())
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_ALL_ORIGINS = True
