@@ -169,3 +169,18 @@ django_heroku.settings(locals())
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_REPLACE_HTTPS_REFERER = True
+
+CSRF_TRUSTED_ORIGINS =True
+#CSRF_TRUSTED_ORIGINS = ['https://front.bluemix.net/']
+
+
+#CSRF_COOKIE_DOMAIN = 'bluemix.net'
+
+#CORS_ORIGIN_WHITELIST = (
+#    'https://front.bluemix.net/',
+#    'front.bluemix.net',
+ #   'bluemix.net',
+#)
+
