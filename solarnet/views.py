@@ -53,7 +53,7 @@ class AdminUserView(viewsets.ViewSet):
                 serializer = UserDetailsSerializer(queryset, many=True)
                 return Response(serializer.data)
             return Response({
-                "message":"client can view all user"
+                "message":"client can't view all user"
             })
     def listNeworks(self ,request):
             serializer = UserDetailsSerializer(request.user)
@@ -62,7 +62,7 @@ class AdminUserView(viewsets.ViewSet):
                 serializer=NetworkSerializer(queryset ,many=True)
                 return Response(serializer.data)
             return Response({
-                "message":"client can view all network"
+                "message":"client can't view all network"
             })
     def listofData(self ,request):
         serializer = UserDetailsSerializer(request.user)
@@ -93,7 +93,7 @@ class AdminUserView(viewsets.ViewSet):
             serializer=DataSerializer(queryset,many=True)
             return Response(serializer.data)
         return Response({
-            "message":"client can view a this "
+            "message":"client can't view a this "
         })
 
 class ClientUserView(viewsets.ViewSet):
