@@ -14,6 +14,9 @@ path('network/',NetworkCreateAPI.as_view()),
 path('node/<int:pk>/', NodeDetail.as_view()),
 path('node/' ,NodeCreate.as_view()),
 path('data/' , DataCreate.as_view()),
+path('currentuser/' ,AdminUserView.as_view({
+            'get': 'currentuser',
+        })),
 ###adminView
 path('listuser/' ,AdminUserView.as_view({
             'get': 'listUtilisateur',
