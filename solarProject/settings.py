@@ -60,6 +60,10 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 ]
 
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'auth'
+
+
 # new
 REST_FRAMEWORK = {
 'DEFAULT_PERMISSION_CLASSES': [
@@ -68,8 +72,13 @@ REST_FRAMEWORK = {
 'DEFAULT_AUTHENTICATION_CLASSES': [ # new
 'rest_framework.authentication.SessionAuthentication',
 'rest_framework.authentication.TokenAuthentication', # new
+'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
 ],
 
+}
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'login',
+    'LOGOUT_URL': 'logout',
 }
 
 MIDDLEWARE = [
