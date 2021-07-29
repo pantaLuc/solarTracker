@@ -48,7 +48,7 @@ class AdminUserView(viewsets.ViewSet):
 
     def currentuser(self ,request):
         serializer=UserDetailsSerializer(request.user)
-        return(serializer.data)
+        return Response(serializer.data)
    
     def listUtilisateur(self,request):
             serializer = UserDetailsSerializer(request.user)
