@@ -76,10 +76,7 @@ REST_FRAMEWORK = {
 ],
 
 }
-SWAGGER_SETTINGS = {
-    'LOGIN_URL': 'login',
-    'LOGOUT_URL': 'logout',
-}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
