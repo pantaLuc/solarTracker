@@ -146,14 +146,13 @@ class ClientUserView(viewsets.ViewSet):
 
 class ChartAPi(APIView):
 
-    def get(self ,_):
+    def get(self,_):
         with connection.cursor() as cursor:
             cursor.execute( """
-                SELECT strftime(d.created_at ,'%Y-%m') as date
-                FROM solarnet_data as d
-                GROUP BY date
-            """
-            )
+                SELECT *
+                FROM solarnet_data as n
+            """,
+             )
             row=cursor.fetchall()
         return Response(row)
 
