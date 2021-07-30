@@ -151,7 +151,6 @@ class ChartAPi(APIView):
             cursor.execute( """
                 SELECT strftime(d.created_at ,'%Y-%m') as date
                 FROM solarnet_data as d
-                JOIN solarnet_node as n ON d.id=n.id
                 GROUP BY date
             """
             )
