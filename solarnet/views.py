@@ -1,7 +1,8 @@
+from functools import partial
 from users.serializers import UserDetailsSerializer
 from django.db.models import query
 from django.shortcuts import redirect, render
-from rest_framework import generics,permissions ,viewsets
+from rest_framework import generics,permissions ,viewsets,status
 from .models import Data, Network ,Node
 from .serializers import DataSerializer, NetworkSerializer, NodeSerializer
 from .permissions import IsUserOrReadOnly
@@ -49,6 +50,14 @@ class AdminUserView(viewsets.ViewSet):
     def currentuser(self ,request):
         serializer=UserDetailsSerializer(request.user)
         return Response(serializer.data)
+    def updateUser(self ,request ,pk=None):
+        user=User.objects.get(id=pk)
+        serializer=UserDetailsSerializer(instance=user ,data=request.data ,partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({
+            "data":serializer.data
+        },status=status.HTTP_201_CREATED)
    
     def listUtilisateur(self,request):
             serializer = UserDetailsSerializer(request.user)

@@ -17,6 +17,9 @@ path('data/' , DataCreate.as_view()),
 path('currentuser/' ,AdminUserView.as_view({
             'get': 'currentuser',
         })),
+path('updateUser/<int:pk>/' ,AdminUserView.as_view({
+'put':'updateUser',
+})),
 ###adminView
 path('listuser/' ,AdminUserView.as_view({
             'get': 'listUtilisateur',
