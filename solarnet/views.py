@@ -55,9 +55,7 @@ class AdminUserView(viewsets.ViewSet):
         serializer=UserDetailsSerializer(instance=user ,data=request.data ,partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response({
-            "data":serializer.data
-        },status=status.HTTP_201_CREATED)
+        return Response(serializer.data)
    
     def listUtilisateur(self,request):
             serializer = UserDetailsSerializer(request.user)
