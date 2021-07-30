@@ -149,8 +149,10 @@ class ChartAPi(APIView):
     def get(self,_):
         with connection.cursor() as cursor:
             cursor.execute( """
-                SELECT *
-                FROM solarnet_data as n
+                SELECT  data,d.created_at
+                FROM solarnet_data as d
+                JOIN solarnet_node as n ON n.id=d.node_id
+                ORDER BY d.created_at DESC
             """,
              )
             row=cursor.fetchall()
