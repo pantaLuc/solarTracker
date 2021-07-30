@@ -1,6 +1,6 @@
 from solarnet.models import Node
 from django.urls import path
-from .views import DataCreate, NetworkCreateAPI, NetworkDetail , NodeCreate, NodeDetail,AdminUserView,ClientUserView
+from .views import ChartAPi, DataCreate, NetworkCreateAPI, NetworkDetail , NodeCreate, NodeDetail,AdminUserView,ClientUserView
 from rest_framework.schemas import get_schema_view # new
 from rest_framework import permissions
 from drf_yasg import openapi # new
@@ -50,7 +50,7 @@ path('usernodeNetwork/<int:pk>/' ,ClientUserView.as_view({
 path('userdatanodenetwork/<int:pk>/',ClientUserView.as_view({
     'get':'userdatanodenetwork',
 })),
-
+path('chart/' ,ChartAPi.as_view()),
 path('openapi', get_schema_view( # new
 title="Solarnet API",
 description="An  API ressource for my  end  Year Project",

@@ -1,4 +1,7 @@
 from functools import partial
+from django.db import connection
+
+from rest_framework.views import APIView
 from users.serializers import UserDetailsSerializer
 from django.db.models import query
 from django.shortcuts import redirect, render
@@ -107,6 +110,7 @@ class AdminUserView(viewsets.ViewSet):
             "message":"client can't view a this "
         })
 
+
 class ClientUserView(viewsets.ViewSet):
 
     def userNetwork(self ,request ,pk):
@@ -140,3 +144,18 @@ class ClientUserView(viewsets.ViewSet):
              "message":"You aren't a client "
         })
 
+class ChartAPi(APIView):
+
+    def get(self ,_):
+        with connection.cursor() as cursor:
+            cursor.execute( """
+                SELECT DATE(d.created_at ,'%Y-%m-%d') as date,sum(d.data) as sum
+                FROM solarnet_data as d
+                JOIN solarnet_node as n ON d.id=n.id
+                GROUP BY date
+            """
+            )
+            row=cursor.fetchall()
+        return Response(row)
+
+        
