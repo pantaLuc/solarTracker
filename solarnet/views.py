@@ -149,7 +149,7 @@ class ChartAPi(APIView):
     def get(self ,_):
         with connection.cursor() as cursor:
             cursor.execute( """
-                SELECT DATE(d.created_at ,'%Y-%m-%d') as date,sum(d.data) as sum
+                SELECT strftime(d.created_at ,'%Y-%m') as date
                 FROM solarnet_data as d
                 JOIN solarnet_node as n ON d.id=n.id
                 GROUP BY date
