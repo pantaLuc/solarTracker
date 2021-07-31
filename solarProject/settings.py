@@ -61,7 +61,8 @@ INSTALLED_APPS = [
 ]
 
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'auth'
+JWT_AUTH_COOKIE = 'my-app-auth'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 
 # new
