@@ -78,7 +78,7 @@ class AdminUserView(viewsets.ViewSet):
             return Response({
                 "message":"client can't view all network"
             })
-    def listofData(self ,request):
+    def listData(self ,request):
         serializer = UserDetailsSerializer(request.user)
         if serializer.data['role']=='admin':
             queryset=Data.objects.all()
@@ -149,7 +149,7 @@ class ChartAPi(APIView):
     def get(self ,_):
         with connection.cursor() as cursor:
             cursor.execute( """
-                SELECT strftime('%Y %m %d %H %m',d.created_at) as date ,data
+                SELECT strftime('%Y %m %d  %H %m',d.created_at) as date ,data
                 FROM solarnet_data as d
                 JOIN solarnet_node as n ON n.id =d.node_id 
                 GROUP BY date

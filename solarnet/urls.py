@@ -29,7 +29,7 @@ path('listneworks/' ,AdminUserView.as_view({
     'get':'listNeworks',
 })),
 path('listData/' ,AdminUserView.as_view({
-    'get':'listofData',
+    'get':'listData',
 })),
 
 path('nodeNetwork/<int:pk>/' ,AdminUserView.as_view({
