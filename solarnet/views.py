@@ -61,16 +61,23 @@ class AdminUserView(viewsets.ViewSet):
         return Response(serializer.data)
    
     def listUtilisateur(self,request):
-        queryset= User.objects.all()
-        serializer = UserDetailsSerializer(queryset, many=True)
-        return Response(serializer.data)
-            
+            serializer = UserDetailsSerializer(request.user)
+            if serializer.data['role']=='admin':
+                queryset= User.objects.all()
+                serializer = UserDetailsSerializer(queryset, many=True)
+                return Response(serializer.data)
+            return Response({
+                "message":"client can't view all user"
+            })
     def listNeworks(self ,request):
-        #serializer = UserDetailsSerializer(request.user)
-        #if serializer.data['role']=='admin':
-        queryset=Network.objects.all()
-        serializer=NetworkSerializer(queryset ,many=True)
-        return Response(serializer.data)
+            serializer = UserDetailsSerializer(request.user)
+            if serializer.data['role']=='admin':
+                queryset=Network.objects.all()
+                serializer=NetworkSerializer(queryset ,many=True)
+                return Response(serializer.data)
+            return Response({
+                "message":"client can't view all network"
+            })
     def listData(self ,request):
         serializer = UserDetailsSerializer(request.user)
         if serializer.data['role']=='admin':
@@ -78,52 +85,64 @@ class AdminUserView(viewsets.ViewSet):
             serializer=DataSerializer(queryset ,many=True)
             return Response(serializer.data)
         return Response({
-            "detail":"You aren't an Admin !"
-        })
+                "message":"client can't view all datas"
+            }) 
     def  nodeNetwork(self ,request ,pk):
-        #serializer = UserDetailsSerializer(request.user)
-        #if serializer.data['role']=='admin':
-        queryset=User.objects.get(id=pk)
-        serializer=UserDetailsSerializer(queryset)
-        netqueryset=Network.objects.get(user=pk)
-        serializerNet=NetworkSerializer(netqueryset)
-        nodequery=Node.objects.filter(network=serializerNet.data['id']).all()
-        nodeserializer=NodeSerializer(nodequery,many=True)
-        return Response(nodeserializer.data)
-        
+        serializer = UserDetailsSerializer(request.user)
+        if serializer.data['role']=='admin':
+            queryset=User.objects.get(id=pk)
+            serializer=UserDetailsSerializer(queryset)
+            netqueryset=Network.objects.get(user=pk)
+            serializerNet=NetworkSerializer(netqueryset)
+            nodequery=Node.objects.filter(network=serializerNet.data['id']).all()
+            nodeserializer=NodeSerializer(nodequery,many=True)
+            return Response(nodeserializer.data)
+        return Response({
+                "message":"client can't view all  Node of user "
+            })
     def dataNode(self , request ,pk):
-        #serializer = UserDetailsSerializer(request.user)
-        #if serializer.data['role']=='admin':
-        queryset=Data.objects.filter(id=pk).all()
-        serializer=DataSerializer(queryset,many=True)
-        return Response(serializer.data)
+        serializer = UserDetailsSerializer(request.user)
+        if serializer.data['role']=='admin':
+            queryset=Data.objects.filter(id=pk).all()
+            serializer=DataSerializer(queryset,many=True)
+            return Response(serializer.data)
+        return Response({
+            "message":"client can't view a this "
+        })
 
 
 class ClientUserView(viewsets.ViewSet):
 
     def userNetwork(self ,request ,pk):
-        #userializer=UserDetailsSerializer(request.user)
-       #if userializer.data['role']=='client':
-        queryset=Network.objects.filter(user=pk).all()
-        serializer=NetworkSerializer(queryset,many=True)
-        return Response(serializer.data)
-       
+        userializer=UserDetailsSerializer(request.user)
+        if userializer.data['role']=='client':
+            queryset=Network.objects.filter(user=pk).all()
+            serializer=NetworkSerializer(queryset,many=True)
+            return Response(serializer.data)
+        return Response({
+            "message":"You aren't a client "
+        })
+
     def usernodeNetwork(self ,request ,pk):
-        #userializer=UserDetailsSerializer(request.user)
-        #if userializer.data['role']=="client":
-        queryset=Network.objects.get(id=pk)
-        netserializer=NetworkSerializer(queryset)
-        nodequeryset=Node.objects.filter(network=netserializer.data['id']).all()
-        nodeserializer=NodeSerializer(nodequeryset,many=True)
-        return Response(nodeserializer.data)
-        
+        userializer=UserDetailsSerializer(request.user)
+        if userializer.data['role']=="client":
+            queryset=Network.objects.get(id=pk)
+            netserializer=NetworkSerializer(queryset)
+            nodequeryset=Node.objects.filter(network=netserializer.data['id']).all()
+            nodeserializer=NodeSerializer(nodequeryset,many=True)
+            return Response(nodeserializer.data)
+        return Response({
+            "message":"You aren't a client "
+        })
     def userdatanodenetwork(self ,request ,pk):
-        #userializer=UserDetailsSerializer(request.user)
-        #if userializer.data['role']=='client':
-        queryset=Data.objects.filter(node=pk).all()
-        dataSerializer=DataSerializer(queryset,many=True)
-        return Response(dataSerializer.data)
-        
+        userializer=UserDetailsSerializer(request.user)
+        if userializer.data['role']=='client':
+            queryset=Data.objects.filter(node=pk).all()
+            dataSerializer=DataSerializer(queryset,many=True)
+            return Response(dataSerializer.data)
+        return Response({
+             "message":"You aren't a client "
+        })
 
 class ChartAPi(APIView):
 
