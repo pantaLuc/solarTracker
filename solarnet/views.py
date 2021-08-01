@@ -72,11 +72,14 @@ class AdminUserView(viewsets.ViewSet):
         serializer=NetworkSerializer(queryset ,many=True)
         return Response(serializer.data)
     def listData(self ,request):
-        #serializer = UserDetailsSerializer(request.user)
-        #if serializer.data['role']=='admin':
-        queryset=Data.objects.all()
-        serializer=DataSerializer(queryset ,many=True)
-        return Response(serializer.data)
+        serializer = UserDetailsSerializer(request.user)
+        if serializer.data['role']=='admin':
+            queryset=Data.objects.all()
+            serializer=DataSerializer(queryset ,many=True)
+            return Response(serializer.data)
+        return Response({
+            "detail":"You aren't an Admin !"
+        })
     def  nodeNetwork(self ,request ,pk):
         #serializer = UserDetailsSerializer(request.user)
         #if serializer.data['role']=='admin':
