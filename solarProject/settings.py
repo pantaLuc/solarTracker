@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+from datetime import timedelta
 
 ######################################################################
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -63,6 +64,9 @@ INSTALLED_APPS = [
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+}
 
 
 # new
