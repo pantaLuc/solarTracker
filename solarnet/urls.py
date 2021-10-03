@@ -1,6 +1,6 @@
 from solarnet.models import Node
 from django.urls import path
-from .views import ChartAPi, DataCreate, NetworkCreateAPI, NetworkDetail , NodeCreate, NodeDetail,AdminUserView,ClientUserView
+from .views import ChartAPi, DataCreate, NetworkCreateAPI, NetworkDetail , NodeCreate, NodeDetail,AdminUserView,ClientUserView, PlaceCreate, PlaceDetail, PlaceList
 from rest_framework.schemas import get_schema_view # new
 from rest_framework import permissions
 from drf_yasg import openapi # new
@@ -56,4 +56,7 @@ title="Solarnet API",
 description="An  API ressource for my  end  Year Project",
 version="1.0.0"
 ), name='openapi-schema'),
+path('place' ,PlaceCreate.as_view()),
+path('place/<int:pk>',PlaceDetail.as_view()),
+path('placelist' , PlaceList.as_view())
 ]

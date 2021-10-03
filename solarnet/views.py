@@ -6,8 +6,8 @@ from users.serializers import UserDetailsSerializer
 from django.db.models import query
 from django.shortcuts import redirect, render
 from rest_framework import generics,permissions ,viewsets,status
-from .models import Data, Network ,Node
-from .serializers import DataSerializer, NetworkSerializer, NodeSerializer
+from .models import Data, Network ,Node, Place
+from .serializers import DataSerializer, NetworkSerializer, NodeSerializer, PlaceSerializer
 from .permissions import IsUserOrReadOnly
 from users.models import User
 from rest_framework.response import Response
@@ -36,7 +36,16 @@ class NodeList(generics.ListCreateAPIView):
     queryset=Node.objects.all()
     serializer_class=NodeSerializer
 
-
+# operation sur le place 
+class PlaceCreate(generics.CreateAPIView):
+    queryset=Place.objects.all()
+    serializer_class=PlaceSerializer
+class PlaceDetail(generics.RetrieveUpdateAPIView):
+    queryset=Place.objects.all()
+    serializer_class=Place
+class PlaceList(generics.ListCreateAPIView):
+    queryset=Place.objects.all()
+    serializer_class=PlaceSerializer
 ###operations sur les datas 
 
 class DataCreate(generics.CreateAPIView):

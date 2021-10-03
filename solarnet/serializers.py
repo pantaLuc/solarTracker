@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Data, Network, Node
+from .models import Data, Network, Node ,Place
 
 class NetworkSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,3 +17,7 @@ class DataSerializer(serializers.ModelSerializer):
     class Meta:
         fields=('id','data','node' ,'created_at')
         model=Data
+class PlaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields=('id' ,'network' ,'user')
+        model=Place
